@@ -24,11 +24,11 @@ for element in root_child_elements:
 
     if isinstance(element, IndividualElement):
 
-            (first, last) = element.get_name()
-            Id.append((element.get_census))
-            gender.append(element.get_gender())
-            name.append(((first+" "+last)))
-            birthday.append(element.get_birth_data())
+        (first, last) = element.get_name()
+        Id.append((element.get_census))
+        gender.append(element.get_gender())
+        name.append(((first+" "+last)))
+        birthday.append(element.get_birth_data())
 
 
 table1 = PrettyTable()
@@ -59,8 +59,8 @@ with GedcomReader(file_path) as parser:
         # Get _value_ of the MARR/DATE tag
         marr_date = fam.sub_tag_value("MARR/DATE")
         if marr_date:
-            print(marr_date)
-            Married.append(marr_date.date)
+            print(type(marr_date))
+            Married.append(marr_date)
 
         husbandid, wifeId = fam.sub_tag("HUSB"), fam.sub_tag("WIFE")
         if husbandid:
@@ -74,5 +74,12 @@ table2.field_names = ["Married", "HusbandID", "HusbandName", "WifeID", "WifeName
 for i in range(len(Married)):
     table2.add_row([Married[i],HusbandID[i], HusbandName[i], wifeID[i], wifeName[i]])
 
-print(table1)
-print(table2)
+a = Married[0]
+print(type(a.date))
+if(1994 > a.date.year):
+    print("Yes")
+else:
+    print("no")
+
+#print(table1)
+#print(table2)
